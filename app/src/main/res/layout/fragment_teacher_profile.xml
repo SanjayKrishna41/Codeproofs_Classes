@@ -32,7 +32,7 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/cityEditText"
+        android:id="@+id/teachDesEdittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -41,7 +41,7 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/updateButton"
+        android:id="@+id/teachupdateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
