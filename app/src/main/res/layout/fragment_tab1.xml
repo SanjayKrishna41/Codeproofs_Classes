@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tab1">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/training_and_development_center"
+            android:textAlignment="center"
+            android:textColor="@color/navigationBarColor"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:fontFamily="serif" />
+
+        <ImageView
+            android:id="@+id/android"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/android" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/android"
+            android:layout_alignStart="@+id/android"
+            android:layout_alignLeft="@+id/android"
+            android:text="Android App Development"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/c"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignTop="@+id/android"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="TODO"
+            android:src="@drawable/c" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/c"
+            android:layout_alignLeft="@+id/c"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_marginBottom="-1dp"
+            android:text="@string/programming_in_c"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/cpp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginRight="19dp"
+            android:src="@drawable/cpp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/cpp"
+            android:layout_alignLeft="@+id/cpp"
+            android:layout_alignBottom="@+id/textView4"
+            android:text="Programming in C++"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/cs"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="220dp"
+            android:src="@drawable/cs"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/cjava"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignTop="@+id/cs"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/java"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cs"
+            android:layout_alignStart="@+id/cs"
+            android:layout_alignLeft="@+id/cs"
+            android:text="C # and .Net"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ajava"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignTop="@+id/cs"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:src="@drawable/jee"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cs"
+            android:layout_alignStart="@+id/c"
+            android:layout_alignLeft="@+id/c"
+            android:text="Core Java"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cs"
+            android:layout_alignStart="@+id/ajava"
+            android:layout_alignLeft="@+id/ajava"
+            android:text="Advanced Java"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/appti"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="380dp"
+            android:src="@drawable/appti" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appti"
+            android:layout_alignStart="@+id/android"
+            android:layout_alignLeft="@+id/android"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="1dp"
+            android:text="Personality Development"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/web"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="384dp"
+            android:src="@drawable/html" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appti"
+            android:layout_alignStart="@+id/c"
+            android:layout_alignLeft="@+id/c"
+            android:text="@string/web_development"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/softtest"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="385dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:src="@drawable/test" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/softtest"
+            android:layout_alignStart="@+id/softtest"
+            android:layout_alignLeft="@+id/softtest"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="-1dp"
+            android:text="@string/software_testing"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/android"
+            android:layout_alignLeft="@+id/android"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-21dp"
+            android:layout_marginLeft="-21dp"
+            android:layout_marginBottom="35dp" />
+
+        <Button
+            android:id="@+id/enquireButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/holo_orange_dark"
+            android:text="@string/enquire_now"
+            android:textColor="@color/windowBackground"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</ScrollView>
