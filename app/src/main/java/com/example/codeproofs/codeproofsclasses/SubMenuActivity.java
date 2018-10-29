@@ -1,6 +1,8 @@
 package com.example.codeproofs.codeproofsclasses;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,35 +22,72 @@ public class SubMenuActivity extends AppCompatActivity implements Tab1.OnFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_menu);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (isInternetOn() == 1) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Cources"));
-        tabLayout.addTab(tabLayout.newTab().setText("About"));
-        tabLayout.addTab(tabLayout.newTab().setText("Contact Us"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            TabLayout tabLayout = findViewById(R.id.tablayout);
+            tabLayout.addTab(tabLayout.newTab().setText("Cources"));
+            tabLayout.addTab(tabLayout.newTab().setText("About"));
+            tabLayout.addTab(tabLayout.newTab().setText("Contact Us"));
+            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = findViewById(R.id.pager);
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+            final ViewPager viewPager = findViewById(R.id.pager);
+            final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            viewPager.setAdapter(pagerAdapter);
+            viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+            tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    viewPager.setCurrentItem(tab.getPosition());
+                }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+                }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+                }
+            });
+
+        } else if (isInternetOn() == 2) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            TabLayout tabLayout = findViewById(R.id.tablayout);
+            tabLayout.addTab(tabLayout.newTab().setText("Cources"));
+            tabLayout.addTab(tabLayout.newTab().setText("About"));
+            tabLayout.addTab(tabLayout.newTab().setText("Contact Us"));
+            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+            final ViewPager viewPager = findViewById(R.id.pager);
+            final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            viewPager.setAdapter(pagerAdapter);
+            viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+            tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    viewPager.setCurrentItem(tab.getPosition());
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+
+        } else {
+            Toast.makeText(SubMenuActivity.this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override
@@ -89,16 +128,23 @@ public class SubMenuActivity extends AppCompatActivity implements Tab1.OnFragmen
                 Intent intent = new Intent(SubMenuActivity.this, LoginActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.item2:
-                Intent intent1 = new Intent(SubMenuActivity.this, MainActivity.class);
-                startActivity(intent1);
-                finish();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public final int isInternetOn() {
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnectedOrConnecting()) {
+            return 1;
+        } else if (mobile.isConnectedOrConnecting()) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 }

@@ -52,33 +52,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if (InternetOn() == 1) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        uname = findViewById(R.id.userNameeditText);
-        pwd = findViewById(R.id.passwordeditText);
-        login = findViewById(R.id.loginbutton);
-        check = findViewById(R.id.remembercheckBox);
-        loginspin = findViewById(R.id.loginSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LoginActivity.this,
-                android.R.layout.simple_spinner_item, coursers);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        loginspin.setAdapter(adapter);
-        login.setOnClickListener(this);
-        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        loginPrefsEditor = loginPreferences.edit();
+            uname = findViewById(R.id.userNameeditText);
+            pwd = findViewById(R.id.passwordeditText);
+            login = findViewById(R.id.loginbutton);
+            check = findViewById(R.id.remembercheckBox);
+            loginspin = findViewById(R.id.loginSpinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(LoginActivity.this,
+                    android.R.layout.simple_spinner_item, coursers);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            loginspin.setAdapter(adapter);
+            login.setOnClickListener(this);
+            loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            loginPrefsEditor = loginPreferences.edit();
 
-        saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if (saveLogin == true) {
-            uname.setText(loginPreferences.getString("username", ""));
-            pwd.setText(loginPreferences.getString("password", ""));
-            check.setChecked(true);
+            saveLogin = loginPreferences.getBoolean("saveLogin", false);
+            if (saveLogin == true) {
+                uname.setText(loginPreferences.getString("username", ""));
+                pwd.setText(loginPreferences.getString("password", ""));
+                check.setChecked(true);
 
-            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Please Login", Toast.LENGTH_SHORT).show();
+            }
+
+        } else if (InternetOn() == 2) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            uname = findViewById(R.id.userNameeditText);
+            pwd = findViewById(R.id.passwordeditText);
+            login = findViewById(R.id.loginbutton);
+            check = findViewById(R.id.remembercheckBox);
+            loginspin = findViewById(R.id.loginSpinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(LoginActivity.this,
+                    android.R.layout.simple_spinner_item, coursers);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            loginspin.setAdapter(adapter);
+            login.setOnClickListener(this);
+            loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            loginPrefsEditor = loginPreferences.edit();
+
+            saveLogin = loginPreferences.getBoolean("saveLogin", false);
+            if (saveLogin == true) {
+                uname.setText(loginPreferences.getString("username", ""));
+                pwd.setText(loginPreferences.getString("password", ""));
+                check.setChecked(true);
+
+                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Please Login", Toast.LENGTH_SHORT).show();
+            }
+
         } else {
-            Toast.makeText(this, "Please Login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+    }
+
+    public final int InternetOn() {
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnectedOrConnecting()) {
+            return 1;
+        } else if (mobile.isConnectedOrConnecting()) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 
@@ -146,12 +198,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-                return true;
-            case R.id.item2:
-                Toast.makeText(getApplicationContext(), "Info", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -3,6 +3,7 @@ package com.example.codeproofs.codeproofsclasses;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -42,26 +43,53 @@ public class EnquireActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enquire);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Arrays.sort(coursers);
+        if (isInternetOn() == 1) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            Arrays.sort(coursers);
 
-        name = findViewById(R.id.nameEditext);
-        phno = findViewById(R.id.phnoEdittext);
-        email = findViewById(R.id.emailEdittext);
-        message = findViewById(R.id.messageEditText);
-        save = findViewById(R.id.saveButton);
-        cancel = findViewById(R.id.cancelButton);
+            name = findViewById(R.id.nameEditext);
+            phno = findViewById(R.id.phnoEdittext);
+            email = findViewById(R.id.emailEdittext);
+            message = findViewById(R.id.messageEditText);
+            save = findViewById(R.id.saveButton);
+            cancel = findViewById(R.id.cancelButton);
 
-        course = findViewById(R.id.courseSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(EnquireActivity.this,
-                android.R.layout.simple_spinner_item, coursers);
+            course = findViewById(R.id.courseSpinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EnquireActivity.this,
+                    android.R.layout.simple_spinner_item, coursers);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        course.setAdapter(adapter);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            course.setAdapter(adapter);
 
-        save.setOnClickListener(this);
-        cancel.setOnClickListener(this);
+            save.setOnClickListener(this);
+            cancel.setOnClickListener(this);
+
+        } else if (isInternetOn() == 2) {
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            Arrays.sort(coursers);
+
+            name = findViewById(R.id.nameEditext);
+            phno = findViewById(R.id.phnoEdittext);
+            email = findViewById(R.id.emailEdittext);
+            message = findViewById(R.id.messageEditText);
+            save = findViewById(R.id.saveButton);
+            cancel = findViewById(R.id.cancelButton);
+
+            course = findViewById(R.id.courseSpinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(EnquireActivity.this,
+                    android.R.layout.simple_spinner_item, coursers);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            course.setAdapter(adapter);
+
+            save.setOnClickListener(this);
+            cancel.setOnClickListener(this);
+        } else {
+            Toast.makeText(EnquireActivity.this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override
@@ -79,12 +107,6 @@ public class EnquireActivity extends AppCompatActivity implements View.OnClickLi
                 Intent intent = new Intent(EnquireActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-                return true;
-            case R.id.item2:
-                Toast.makeText(getApplicationContext(), "Info", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -108,6 +130,21 @@ public class EnquireActivity extends AppCompatActivity implements View.OnClickLi
             }
         } else {
             finish();
+        }
+    }
+
+    public final int isInternetOn() {
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnectedOrConnecting()) {
+            return 1;
+        } else if (mobile.isConnectedOrConnecting()) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 

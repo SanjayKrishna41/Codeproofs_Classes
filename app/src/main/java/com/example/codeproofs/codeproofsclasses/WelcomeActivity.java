@@ -3,6 +3,7 @@ package com.example.codeproofs.codeproofsclasses;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,20 +48,43 @@ public class WelcomeActivity extends AppCompatActivity implements NavigationView
         userid = sharedPreferences.getString("username", "");
         passwod = sharedPreferences.getString("password", "");
 
-        BackgroundWork backgroundWork = new BackgroundWork(this);
-        backgroundWork.execute("batch", userid);
+        if (isInternetOn() == 1) {
+            BackgroundWork backgroundWork = new BackgroundWork(this);
+            backgroundWork.execute("batch", userid);
 
-        drawerLayout = findViewById(R.id.drawlayout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            drawerLayout = findViewById(R.id.drawlayout);
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_draw_open, R.string.nav_draw_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_draw_open, R.string.nav_draw_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentlayout, new StudentBatchFragment()).commit();
-            navigationView.setCheckedItem(R.id.batch);
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentlayout, new StudentBatchFragment()).commit();
+                navigationView.setCheckedItem(R.id.batch);
+            }
+
+        } else if (isInternetOn() == 2) {
+            BackgroundWork backgroundWork = new BackgroundWork(this);
+            backgroundWork.execute("batch", userid);
+
+            drawerLayout = findViewById(R.id.drawlayout);
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_draw_open, R.string.nav_draw_close);
+            drawerLayout.addDrawerListener(toggle);
+            toggle.syncState();
+
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentlayout, new StudentBatchFragment()).commit();
+                navigationView.setCheckedItem(R.id.batch);
+            }
+
+        } else {
+            Toast.makeText(WelcomeActivity.this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
@@ -171,6 +195,21 @@ public class WelcomeActivity extends AppCompatActivity implements NavigationView
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
+        }
+    }
+
+    public final int isInternetOn() {
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnectedOrConnecting()) {
+            return 1;
+        } else if (mobile.isConnectedOrConnecting()) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 

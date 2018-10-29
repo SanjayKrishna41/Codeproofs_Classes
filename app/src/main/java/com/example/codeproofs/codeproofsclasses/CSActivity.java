@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class CSActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;
@@ -56,12 +55,6 @@ public class CSActivity extends AppCompatActivity implements View.OnClickListene
                 Intent intent = new Intent(CSActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-                return true;
-            case R.id.item2:
-                Toast.makeText(getApplicationContext(), "Info", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

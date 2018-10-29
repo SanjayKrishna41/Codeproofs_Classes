@@ -6,14 +6,4 @@
         android:icon="@drawable/login"
         android:title="@string/login"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/item2"
-        android:icon="@drawable/info"
-        android:title="@string/info"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/item3"
-        android:icon="@drawable/clock"
-        android:title="@string/help"
-        app:showAsAction="never" />
 </menu>

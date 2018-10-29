@@ -1,6 +1,8 @@
 package com.example.codeproofs.codeproofsclasses;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class AdvanceJavaActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;
@@ -58,14 +59,23 @@ public class AdvanceJavaActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 finish();
                 return true;
-            case R.id.item2:
-                Toast.makeText(getApplicationContext(), "Info", Toast.LENGTH_LONG).show();
-                return true;
-            case R.id.item3:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_LONG).show();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public final int isInternetOn() {
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifi.isConnectedOrConnecting()) {
+            return 1;
+        } else if (mobile.isConnectedOrConnecting()) {
+            return 2;
+        } else {
+            return 0;
         }
     }
 }
